@@ -1,0 +1,3 @@
+el promedio de la longitud de las palabras es una medida simple
+la desviacion estandar dice cuanto se alejan las palabras del promedio
+un texto con palabras de longitud parecida tiene desviacion pequena

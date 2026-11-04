@@ -1,8 +1,19 @@
-# Ejercicio Práctico: Conteo y Desviación Estándar en MapReduce
+# Mini ejercicio
 
-## Consigna
-Dado un conjunto de datos en el directorio `datos_practica/` que contiene archivos de texto con registros de logs de aplicaciones:
+Se tiene un archivo con una sola linea:
+hola mundo hola hadoop
 
-1. Ejecute el comando `multifilewc` sobre la carpeta para calcular la frecuencia de cada término a través de todos los archivos.
-2. Calcule la desviación estándar de la longitud de las palabras contenidas en el corpus utilizando `wordstandarddeviation`.
-3. Indique en la respuesta el valor final de la desviación estándar obtenido en la consola.
+## Parte A: a mano
+
+1. Escribe los pares que emite el Map de wordstandarddeviation para cada palabra.
+2. Escribe el resultado del Reduce para las claves count, length y square.
+3. Calcula mean y stddev con las formulas del README.
+4. Escribe la salida que esperarias de multifilewc para este archivo.
+
+## Parte B: en Hadoop
+
+Crea el archivo dentro del contenedor:
+mkdir -p /tmp/equipo2/ejercicio
+echo "hola mundo hola hadoop" > /tmp/equipo2/ejercicio/entrada.txt
+
+Corre wordstandarddeviation sobre esa carpeta y compara con tu resultado de la Parte A.

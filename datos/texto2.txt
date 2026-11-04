@@ -1,0 +1,3 @@
+la fase reduce recibe todos los valores de una misma clave
+antes del reduce hadoop ordena y agrupa los pares por clave
+esa fase intermedia se llama shuffle y es una de las mas costosas
