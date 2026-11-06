@@ -111,7 +111,7 @@ awk '{s+=$NF} END{print s}' resultados/multifilewc.txt
 
 ## 5. Cómo funcionan Map y Reduce aquí
 
-![Diagrama de Map y Reduce](diagrama.png)
+[Ver el diagrama de Map y Reduce](diagrama.png)
 
 `wordstandarddeviation`:
 
