@@ -1,2 +1,0 @@
-== wordstandarddeviation ==
-/tmp/equipo2/ejecutar.sh: line 16: hadoop: command not found

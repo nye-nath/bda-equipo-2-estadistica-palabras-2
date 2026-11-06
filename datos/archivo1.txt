@@ -1,1 +1,0 @@
-hadoop mapreduce big data ejemplo de prueba uno

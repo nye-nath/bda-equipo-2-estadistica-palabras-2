@@ -1,21 +1,20 @@
 #!/bin/bash
-set -e
+# Ejecutar DENTRO del contenedor Hadoop
+HADOOP=/opt/hadoop/bin/hadoop
+JAR=hadoop-mapreduce-examples-3.3.6.jar
 
-BASE=/tmp/equipo2
-JAR=${HADOOP_HOME:-/opt/hadoop}/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.6.jar
+rm -rf /tmp/salida_std /tmp/salida_multi
+cd /opt/hadoop/share/hadoop/mapreduce
 
-if [ ! -f "$JAR" ]; then
-  echo "No se encontro el jar: $JAR"
-  echo "Revisa la variable HADOOP_HOME y la carpeta share/hadoop/mapreduce"
-  exit 1
-fi
+echo "=== wordstandarddeviation ==="
+$HADOOP jar $JAR wordstandarddeviation /tmp/estadistica /tmp/salida_std 2>&1 | tee /tmp/std.log
+echo "=== multifilewc ==="
+$HADOOP jar $JAR multifilewc /tmp/multifile /tmp/salida_multi
 
-rm -rf "$BASE/salida-wordstddev" "$BASE/salida-multifilewc"
-
-echo "== wordstandarddeviation =="
-hadoop jar "$JAR" wordstandarddeviation "$BASE/datos" "$BASE/salida-wordstddev"
-cat "$BASE/salida-wordstddev/part-r-00000"
-
-echo "== multifilewc =="
-hadoop jar "$JAR" multifilewc "$BASE/datos" "$BASE/salida-multifilewc"
-head -n 20 "$BASE/salida-multifilewc/part-r-00000"
+echo
+echo "=== RESULTADOS ==="
+echo "wordstandarddeviation (count, length, square):"
+cat /tmp/salida_std/part-r-00000
+grep "standard deviation" /tmp/std.log
+echo "multifilewc (primeras 15 líneas):"
+head -15 /tmp/salida_multi/part-r-00000

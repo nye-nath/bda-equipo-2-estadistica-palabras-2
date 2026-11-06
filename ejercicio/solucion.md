@@ -1,18 +1,16 @@
-# Solución del Ejercicio Práctico
+# Solución: longitud promedio de las palabras
 
-## Pasos para la resolución
+Dentro del contenedor:
 
-1. Copiar los archivos de datos al contenedor Docker:
-   docker cp datos_practica/ hadoop-standalone:/tmp/
+```bash
+cat /tmp/salida_std/part-r-00000
+awk '$1=="length"{l=$2} $1=="count"{c=$2} END{print l/c}' /tmp/salida_std/part-r-00000
+awk '{s+=$NF} END{print s}' /tmp/salida_multi/part-r-00000
+```
 
-2. Ejecutar MapReduce para el conteo de múltiples archivos:
-   hadoop jar $HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.6.jar multifilewc /tmp/datos_practica /tmp/salida_multi
+Resultados:
 
-3. Ejecutar MapReduce para calcular la desviación estándar:
-   hadoop jar $HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.6.jar wordstandarddeviation /tmp/datos_practica /tmp/salida_stddev
+- `count` es 25785 y `length` es 111509, así que la longitud promedio es 111509 / 25785 = 4.32457 letras por palabra.
+- La suma de `multifilewc` es 25785, igual que `count`. Los dos ejemplos cuentan las mismas palabras, solo que `multifilewc` las separa por palabra y `wordstandarddeviation` las junta en tres totales.
 
-4. Leer el resultado obtenido:
-   hadoop fs -cat /tmp/salida_stddev/part-r-00000
-
-## Resultado Esperado
-El comando mostrará el cálculo de la media y la desviación estándar de la longitud de las palabras analizadas en los datos de entrada.
+Cómo funciona: el map de `wordstandarddeviation` emite el largo de cada palabra y el reduce los suma, así que el promedio es la suma de largos entre la cantidad de palabras.

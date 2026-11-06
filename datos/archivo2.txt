@@ -1,1 +1,0 @@
-hadoop mapreduce desviacion estandar ejemplo dos

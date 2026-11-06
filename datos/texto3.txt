@@ -1,3 +1,0 @@
-los archivos pequenos son un problema para hadoop
-cada archivo genera una tarea map aunque tenga pocas lineas
-multifilewc junta varios archivos pequenos en una sola tarea

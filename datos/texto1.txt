@@ -1,3 +1,0 @@
-hadoop es un sistema para procesar grandes cantidades de datos
-mapreduce divide el trabajo en tareas pequenas que corren en paralelo
-cada tarea map lee un pedazo de los datos y emite pares clave valor
